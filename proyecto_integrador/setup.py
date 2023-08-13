@@ -12,7 +12,7 @@ with open('HISTORY.rst') as history_file:
 
 requirements = ['Click>=7.0', ]
 
-test_requirements = [ ]
+test_requirements = []
 
 setup(
     author="proyecto integrador",
@@ -31,7 +31,7 @@ setup(
     description="proyecto integrador para la materia de MLOPs",
     entry_points={
         'console_scripts': [
-            'proyecto_integrador=proyecto_integrador.cli:main',
+                'proyecto_integrador=proyecto_integrador.cli:main',
         ],
     },
     install_requires=requirements,
@@ -40,7 +40,10 @@ setup(
     include_package_data=True,
     keywords='proyecto_integrador',
     name='proyecto_integrador',
-    packages=find_packages(include=['proyecto_integrador', 'proyecto_integrador.*']),
+    packages=find_packages(
+        include=[
+            'proyecto_integrador',
+            'proyecto_integrador.*']),
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/javierfn90/proyecto_integrador',

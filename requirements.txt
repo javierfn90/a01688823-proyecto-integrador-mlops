@@ -8,3 +8,7 @@ xgboost
 catboost
 lightgbm
 pytest
+pre-commit
+autopep8
+flake8
+pylint

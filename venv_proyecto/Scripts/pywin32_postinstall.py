@@ -10,13 +10,17 @@ import sysconfig
 
 try:
     import winreg as winreg
-except:
+except BaseException:
     import winreg
 
 # Send output somewhere so it can be found if necessary...
 import tempfile
 
-tee_f = open(os.path.join(tempfile.gettempdir(), "pywin32_postinstall.log"), "w")
+tee_f = open(
+    os.path.join(
+        tempfile.gettempdir(),
+        "pywin32_postinstall.log"),
+    "w")
 
 
 class Tee:
@@ -86,8 +90,10 @@ except NameError:
     def get_root_hkey():
         try:
             winreg.OpenKey(
-                winreg.HKEY_LOCAL_MACHINE, root_key_name, 0, winreg.KEY_CREATE_SUB_KEY
-            )
+                winreg.HKEY_LOCAL_MACHINE,
+                root_key_name,
+                0,
+                winreg.KEY_CREATE_SUB_KEY)
             return winreg.HKEY_LOCAL_MACHINE
         except OSError:
             # Either not exist, or no permissions to create subkey means
@@ -101,8 +107,13 @@ except NameError:
     # Create a function with the same signature as create_shortcut provided
     # by bdist_wininst
     def create_shortcut(
-        path, description, filename, arguments="", workdir="", iconpath="", iconindex=0
-    ):
+            path,
+            description,
+            filename,
+            arguments="",
+            workdir="",
+            iconpath="",
+            iconindex=0):
         import pythoncom
         from win32com.shell import shell
 
@@ -144,7 +155,7 @@ def CopyTo(desc, src, dest):
     import win32api
     import win32con
 
-    while 1:
+    while True:
         try:
             win32api.CopyFile(src, dest, 0)
             return
@@ -161,8 +172,10 @@ def CopyTo(desc, src, dest):
                 % (desc, details.strerror)
             )
             rc = win32api.MessageBox(
-                0, full_desc, "Installation Error", win32con.MB_ABORTRETRYIGNORE
-            )
+                0,
+                full_desc,
+                "Installation Error",
+                win32con.MB_ABORTRETRYIGNORE)
             if rc == win32con.IDABORT:
                 raise
             elif rc == win32con.IDIGNORE:
@@ -190,7 +203,8 @@ def LoadSystemModule(lib_dir, modname):
     )
     filename = os.path.join(lib_dir, "pywin32_system32", filename)
     loader = importlib.machinery.ExtensionFileLoader(modname, filename)
-    spec = importlib.machinery.ModuleSpec(name=modname, loader=loader, origin=filename)
+    spec = importlib.machinery.ModuleSpec(
+        name=modname, loader=loader, origin=filename)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
 
@@ -203,7 +217,9 @@ def SetPyKeyVal(key_name, value_name, value):
         try:
             winreg.SetValueEx(my_key, value_name, 0, winreg.REG_SZ, value)
             if verbose:
-                print("-> %s\\%s[%s]=%r" % (root_key_name, key_name, value_name, value))
+                print(
+                    "-> %s\\%s[%s]=%r" %
+                    (root_key_name, key_name, value_name, value))
         finally:
             my_key.Close()
     finally:
@@ -218,7 +234,9 @@ def UnsetPyKeyVal(key_name, value_name, delete_key=False):
         try:
             winreg.DeleteValue(my_key, value_name)
             if verbose:
-                print("-> DELETE %s\\%s[%s]" % (root_key_name, key_name, value_name))
+                print(
+                    "-> DELETE %s\\%s[%s]" %
+                    (root_key_name, key_name, value_name))
         finally:
             my_key.Close()
         if delete_key:
@@ -247,7 +265,8 @@ def RegisterCOMObjects(register=True):
         __import__(module)
         mod = sys.modules[module]
         flags["finalize_register"] = getattr(mod, "DllRegisterServer", None)
-        flags["finalize_unregister"] = getattr(mod, "DllUnregisterServer", None)
+        flags["finalize_unregister"] = getattr(
+            mod, "DllUnregisterServer", None)
         klass = getattr(mod, klass_name)
         func(klass, **flags)
 
@@ -264,7 +283,9 @@ def RegisterHelpFile(register=True, lib_dir=None):
             SetPyKeyVal("Help\\Pythonwin Reference", None, chm_file)
             return chm_file
         else:
-            print("NOTE: PyWin32.chm can not be located, so has not " "been registered")
+            print(
+                "NOTE: PyWin32.chm can not be located, so has not "
+                "been registered")
     else:
         UnsetPyKeyVal("Help\\Pythonwin Reference", None, delete_key=True)
     return None
@@ -281,33 +302,31 @@ def RegisterPythonwin(register=True, lib_dir=None):
     if lib_dir is None:
         lib_dir = sysconfig.get_paths()["platlib"]
     classes_root = get_root_hkey()
-    ## Installer executable doesn't seem to pass anything to postinstall script indicating if it's a debug build,
+    # Installer executable doesn't seem to pass anything to postinstall script
+    # indicating if it's a debug build,
     pythonwin_exe = os.path.join(lib_dir, "Pythonwin", "Pythonwin.exe")
     pythonwin_edit_command = pythonwin_exe + ' -edit "%1"'
 
     keys_vals = [
-        (
-            "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Pythonwin.exe",
-            "",
-            pythonwin_exe,
-        ),
-        (
-            "Software\\Classes\\Python.File\\shell\\Edit with Pythonwin",
-            "command",
-            pythonwin_edit_command,
-        ),
-        (
-            "Software\\Classes\\Python.NoConFile\\shell\\Edit with Pythonwin",
-            "command",
-            pythonwin_edit_command,
-        ),
+        ("Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\Pythonwin.exe",
+         "",
+         pythonwin_exe,
+         ),
+        ("Software\\Classes\\Python.File\\shell\\Edit with Pythonwin",
+         "command",
+         pythonwin_edit_command,
+         ),
+        ("Software\\Classes\\Python.NoConFile\\shell\\Edit with Pythonwin",
+         "command",
+         pythonwin_edit_command,
+         ),
     ]
 
     try:
         if register:
             for key, sub_key, val in keys_vals:
-                ## Since winreg only uses the character Api functions, this can fail if Python
-                ##  is installed to a path containing non-ascii characters
+                # Since winreg only uses the character Api functions, this can fail if Python
+                # is installed to a path containing non-ascii characters
                 hkey = winreg.CreateKey(classes_root, key)
                 if sub_key:
                     hkey = winreg.CreateKey(hkey, sub_key)
@@ -367,7 +386,8 @@ def get_system_dir():
 
         try:
             if win32process.IsWow64Process():
-                return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEMX86)
+                return shell.SHGetSpecialFolderPath(
+                    0, shellcon.CSIDL_SYSTEMX86)
             return shell.SHGetSpecialFolderPath(0, shellcon.CSIDL_SYSTEM)
         except (pythoncom.com_error, win32process.error):
             return win32api.GetSystemDirectory()
@@ -561,7 +581,8 @@ def install(lib_dir):
                 print("Shortcut for Pythonwin created")
             # And the docs.
             if chm_file:
-                dst = os.path.join(fldr, "Python for Windows Documentation.lnk")
+                dst = os.path.join(
+                    fldr, "Python for Windows Documentation.lnk")
                 doc = "Documentation for the PyWin32 extensions"
                 create_shortcut(chm_file, doc, dst)
                 file_created(dst)
@@ -587,7 +608,8 @@ def install(lib_dir):
         import webbrowser
 
         try:
-            webbrowser.open("https://mhammond.github.io/pywin32_installers.html")
+            webbrowser.open(
+                "https://mhammond.github.io/pywin32_installers.html")
         except webbrowser.Error:
             print("Please visit https://mhammond.github.io/pywin32_installers.html")
 
@@ -692,7 +714,8 @@ def uninstall(lib_dir):
 
 def verify_destination(location):
     if not os.path.isdir(location):
-        raise argparse.ArgumentTypeError('Path "{}" does not exist!'.format(location))
+        raise argparse.ArgumentTypeError(
+            'Path "{}" does not exist!'.format(location))
     return location
 
 

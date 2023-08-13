@@ -82,7 +82,8 @@ def main():
         "Pythonwin/pywin/test/all.py",
     ]
     for script in scripts:
-        maybes = [os.path.join(directory, script) for directory in code_directories]
+        maybes = [os.path.join(directory, script)
+                  for directory in code_directories]
         find_and_run(maybes, extras)
 
     # win32com
