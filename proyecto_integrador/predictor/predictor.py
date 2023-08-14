@@ -1,46 +1,63 @@
+import argparse
 import pandas as pd
 import joblib
 from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
+from xgboost import XGBRegressor
+from catboost import CatBoostRegressor
+from lightgbm import LGBMRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import r2_score
 
-# Load the preprocessed data
-data = pd.read_csv('proyecto_integrador\preprocess\preprocessed_data.csv')
+class ModelPredictor:
+    """
+    A class to load a trained machine learning model and make predictions on new data.
 
-# Load the trained models
-model_abr = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_AdaBoostRegressor.pkl')
-model_cbr = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_CatBoostRegressor.pkl')
-model_dtr = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_DecisionTreeRegressor.pkl')
-model_gbr = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_GradientBoostingRegressor.pkl')
-model_lgbm = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_LGBMRegressor.pkl')
-model_lr = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_LinearRegression.pkl')
-model_rf = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_RandomForestRegressor.pkl')
-model_xgb = joblib.load(r'C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_XGBRegressor.pkl')
+    Parameters:
+        model_path (str): Path to the trained model file (joblib format).
 
-# Make predictions with each model
-predictions_abr = model_abr.predict(data)
-predictions_cbr = model_cbr.predict(data)
-predictions_dtr = model_dtr.predict(data)
-predictions_gbr = model_gbr.predict(data)
-predictions_lgbm = model_lgbm.predict(data)
-predictions_lr = model_lr.predict(data)
-predictions_rf = model_rf.predict(data)
-predictions_xgb = model_xgb.predict(data)
+    Methods:
+        predict(new_data):
+            Makes predictions on the provided new_data using the loaded model.
 
-# Create a DataFrame for each model's predictions
-predictions_abr_df = pd.DataFrame(predictions_abr, columns=['prediction_abr'])
-predictions_cbr_df = pd.DataFrame(predictions_cbr, columns=['prediction_cbr'])
-predictions_dtr_df = pd.DataFrame(predictions_dtr, columns=['prediction_dtr'])
-predictions_gbr_df = pd.DataFrame(predictions_gbr, columns=['prediction_gbr'])
-predictions_lgbm_df = pd.DataFrame(predictions_lgbm, columns=['prediction_lgbm'])
-predictions_lr_df = pd.DataFrame(predictions_lr, columns=['prediction_lr'])
-predictions_rf_df = pd.DataFrame(predictions_rf, columns=['prediction_rf'])
-predictions_xgb_df = pd.DataFrame(predictions_xgb, columns=['prediction_xgb'])
+    Usage:
+        $ python predictor.py 
+        C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\models\model_AdaBoostRegressor.pkl 
+        C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\preprocess\preprocessed_data.csv
+    """
 
-# Concatenate the individual DataFrames into a single DataFrame
-all_predictions_df = pd.concat([predictions_abr_df, predictions_cbr_df,
-                                predictions_dtr_df, predictions_gbr_df,
-                                predictions_lgbm_df, predictions_lr_df,
-                                predictions_rf_df, predictions_xgb_df], axis=1)
-    
-# Save the predictions to a file
-all_predictions_df.to_csv('all_predictions.csv', index=False)
+    def __init__(self, model_path):
+        """
+        Initializes the ModelPredictor instance.
+
+        Parameters:
+            model_path (str): Path to the trained model file (joblib format).
+        """
+        self.model = joblib.load(model_path)
+
+    def predict(self, new_data):
+        """
+        Makes predictions on the provided new_data using the loaded model.
+
+        Parameters:
+            new_data: The data on which to make predictions.
+
+        Returns:
+            Predicted outputs from the model.
+        """
+        return self.model.predict(new_data)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Model Predictor')
+    parser.add_argument('model_path', type=str, help='Path to the trained model file')
+    parser.add_argument('new_data', type=str, help='Path to the file containing new data for prediction')
+    args = parser.parse_args()
+
+    predictor = ModelPredictor(args.model_path)
+
+    new_data = pd.read_csv(args.new_data)
+
+    predictions = predictor.predict(new_data)
+    print(predictions)
+
