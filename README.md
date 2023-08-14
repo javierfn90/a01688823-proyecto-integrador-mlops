@@ -27,9 +27,13 @@ Beyond the solutions already created on Kaggle, several other models can be trai
 
 The final output of this project would be a trained model that can predict a car's price given certain features. This model could be used in an application or a website to predict a car's price in real time.
 
+
 How to create and activate a virtual environment in windows and linux
-Windows
+
+Windows:
+
 Open the command prompt (cmd) or PowerShell. Make sure you have Python and pip installed. You can check if they are installed by running the commands python --version and pip --version. If they are not installed, you can download them from the official Python website. Install the virtualenv package using the command pip install virtualenv. Create a new virtual environment by running the command virtualenv [environment_name], replacing [environment_name] with the name you want to give to your virtual environment. Activate the virtual environment by running the command [environment_name]\Scripts\activate, replacing [environment_name] with the name you gave to your virtual environment. Once the virtual environment is activated, you can install packages from a requirements.txt file using the command pip install -r requirements.txt. Make sure to specify the correct path to the requirements.txt file.
 
-Linux
+Linux:
+
 Open a terminal window. Make sure you have Python and pip installed. You can check if they are installed by running the commands python3 --version and pip3 --version. If they are not installed, you can install them using your distribution’s package manager (e.g., apt-get install python3 python3-pip on Ubuntu). Install the virtualenv package using the command pip3 install virtualenv. Create a new virtual environment by running the command virtualenv [environment_name], replacing [environment_name] with the name you want to give to your virtual environment. Activate the virtual environment by running the command source [environment_name]/bin/activate, replacing [environment_name] with the name you gave to your virtual environment. Once the virtual environment is activated, you can install packages from a requirements.txt file using the command pip3 install -r requirements.txt. Make sure to specify the correct path to the requirements.txt file.
