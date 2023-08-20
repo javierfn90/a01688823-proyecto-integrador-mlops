@@ -1,5 +1,25 @@
+import logging
 import requests
 import shutil
+
+# Set up logging configuration
+logging.basicConfig(filename='proyecto_integrador/load/load.log',
+                    level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Create logger
+logger = logging.getLogger(__name__)
+
+# Add file handler to logger
+file_handler = logging.FileHandler('proyecto_integrador\load\load.log')
+file_handler.setLevel(logging.DEBUG)
+
+# Create formatter and add it to the file handler
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+
+# Add the file handler to the logger
+logger.addHandler(file_handler)
 
 # URL of the file to download
 file_url = "https://www.kaggle.com/datasets/hellbuoy/car-price-prediction/download?datasetVersionNumber=1"
@@ -18,6 +38,7 @@ if response.status_code == 200:
         for chunk in response.iter_content(chunk_size=128):
             file.write(chunk)
 
-    print("File downloaded successfully.")
+    logger.info("File downloaded successfully.")
 else:
-    print("Failed to download the file.")
+    logger.error("Failed to download the file.")
+    logger.warning("Check the file URL or internet connection.")

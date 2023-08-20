@@ -11,9 +11,9 @@
   <meta name="turbolinks-cache-control" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <meta name="theme-color" content="#008ABC" />
-  <script nonce="2odX5YAGb/O7a6AvU3cDrg==" type="text/javascript">
-    window["pageRequestStartTime"] = 1691965334917;
-    window["pageRequestEndTime"] = 1691965334923;
+  <script nonce="sO1FAwBKCLViBMWCPnTqHw==" type="text/javascript">
+    window["pageRequestStartTime"] = 1692487169072;
+    window["pageRequestEndTime"] = 1692487169079;
     window["initialPageLoadStartTime"] = new Date().getTime();
   </script>
   <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" />
@@ -30,7 +30,7 @@
     rel="stylesheet" media="print" id="async-google-font-1" />
   <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
     rel="stylesheet" media="print" id="async-google-font-2" />
-  <script nonce="2odX5YAGb/O7a6AvU3cDrg==" type="text/javascript">
+  <script nonce="sO1FAwBKCLViBMWCPnTqHw==" type="text/javascript">
     const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
     styleSheetIds.forEach(function (id) {
       document.getElementById(id).addEventListener("load", function() {
@@ -44,7 +44,7 @@
   
     
  
-      <script nonce="2odX5YAGb/O7a6AvU3cDrg==">
+      <script nonce="sO1FAwBKCLViBMWCPnTqHw==">
         try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
         d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
         y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
@@ -52,7 +52,7 @@
         (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
         })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
     </script>
-    <script nonce="2odX5YAGb/O7a6AvU3cDrg==">
+    <script nonce="sO1FAwBKCLViBMWCPnTqHw==">
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
@@ -63,7 +63,7 @@
             'content_group1': 'Account'
         });
     </script>
-    <script nonce="2odX5YAGb/O7a6AvU3cDrg==" async src="https://www.googletagmanager.com/gtag/js?id=G-T7QHS60L4Q"></script>
+    <script nonce="sO1FAwBKCLViBMWCPnTqHw==" async src="https://www.googletagmanager.com/gtag/js?id=G-T7QHS60L4Q"></script>
 
   
     
@@ -79,14 +79,14 @@
     
 
 
-    <script nonce="2odX5YAGb/O7a6AvU3cDrg==">window['useKaggleAnalytics'] = true;</script>
+    <script nonce="sO1FAwBKCLViBMWCPnTqHw==">window['useKaggleAnalytics'] = true;</script>
 
-  <script id="gapi-target" nonce="2odX5YAGb/O7a6AvU3cDrg==" src="https://apis.google.com/js/api.js" defer
+  <script id="gapi-target" nonce="sO1FAwBKCLViBMWCPnTqHw==" src="https://apis.google.com/js/api.js" defer
     async></script>
-  <script nonce="2odX5YAGb/O7a6AvU3cDrg==" src="/static/assets/runtime.js?v=98bbeab6a4c30a23603e" data-turbolinks-track="reload"></script>
-  <script nonce="2odX5YAGb/O7a6AvU3cDrg==" src="/static/assets/vendor.js?v=4306927b086ff81d87b2" data-turbolinks-track="reload"></script>
-  <script nonce="2odX5YAGb/O7a6AvU3cDrg==" src="/static/assets/app.js?v=c62fa8bbf1ba4225033c" data-turbolinks-track="reload"></script>
-    <script nonce="2odX5YAGb/O7a6AvU3cDrg==" type="text/javascript">
+  <script nonce="sO1FAwBKCLViBMWCPnTqHw==" src="/static/assets/runtime.js?v=b0dc7e961cc26682c8b8" data-turbolinks-track="reload"></script>
+  <script nonce="sO1FAwBKCLViBMWCPnTqHw==" src="/static/assets/vendor.js?v=4306927b086ff81d87b2" data-turbolinks-track="reload"></script>
+  <script nonce="sO1FAwBKCLViBMWCPnTqHw==" src="/static/assets/app.js?v=14afbb05b51e5d606956" data-turbolinks-track="reload"></script>
+    <script nonce="sO1FAwBKCLViBMWCPnTqHw==" type="text/javascript">
       window.kaggleStackdriverConfig = {
         key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
         projectId: 'kaggle-161607',
