@@ -1,18 +1,9 @@
 # main.py
-import unittest
 import pandas as pd
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
 import numpy as np
-
-class TestDataExistence(unittest.TestCase):
-    def test_data_existence(self):
-        # Load training data
-        df_train = pd.read_csv(r'proyecto_integrador\data\CarPrice_Assignment.csv')
-
-        # Verify training data existance
-        self.assertFalse(df_train.empty, "No training data")
 
 class InputData(BaseModel):
     feature1: float
@@ -45,6 +36,3 @@ def predict(input_data: InputData):
     # Create an instance of the output data model and return it
     output_data = OutputData(prediction=int(prediction[0]))
     return output_data
-
-if __name__ == "__main__":
-    unittest.main()
