@@ -56,18 +56,6 @@ The packages needed to run this repository are enlisted in the requirements.txt 
 
 ## How to create and activate a virtual environment in Windows
 
-* Open the command prompt (cmd) or PowerShell. Make sure you have Python and pip installed. You can check if they are installed by running the commands 
-
-```bash
- python --version and pip --version
-```
-
-* If they are not installed, you can download them from the official Python website. Install the virtualenv package using the command:
-
-```bash
- pip install virtualenv
-```
-
  * Create a new virtual environment by running the command:
 
  ```bash
