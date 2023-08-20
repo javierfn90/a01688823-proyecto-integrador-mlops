@@ -7,13 +7,13 @@
 # CAR PRICE PREDICTION - KAGGLE DATASET
 
 ## Dataset Description
-The car price prediction dataset available on Kaggle is all about the technical details of various car models. The dataset includes both technical and price details of the cars. The main aim of the dataset is to predict car prices based on given features such as engine power, mileage, manufacturing year, etc.
+The car price prediction dataset available on Kaggle is all about the technical details of various car models. The dataset includes both technical and price details of the cars. The main aim of the dataset is to predict car prices based on given features such as engine power, mileage, manufacturing year, etc. The dataset can be found at https://www.kaggle.com/datasets/hellbuoy/car-price-prediction
 
 ## Problem Addressed
 The main problem that this dataset addresses is car price prediction. Given a set of car features like engine power, mileage, manufacturing year, etc., the goal is to predict the car's price. This is a regression task since the car price is a continuous quantity.
 
 ## Existing Solutions
-There are several solutions (notebooks) already developed on Kaggle for this dataset. These solutions include different modeling approaches and techniques like linear regression, random forest regression, support vector regression, etc.
+There are several solutions (notebooks) already developed on Kaggle for this dataset. These solutions include different modeling approaches and techniques like linear regression, random forest regression, support vector regression, etc. You can find them in the next URL: https://www.kaggle.com/datasets/hellbuoy/car-price-prediction/code
 
 The minimum necessary solution to be able to train and save a model would include:
 
@@ -23,6 +23,8 @@ The minimum necessary solution to be able to train and save a model would includ
 - Model evaluation
 - Saving the trained model
 
+For this excercise we will use the notebook developed by Kumod Sharma: https://www.kaggle.com/code/kdsharma/car-price-prediction-with-accuracy-of-95
+
 ## Model Scope
 The scope of this project is to serve as a proof of concept for car price prediction. While the model will be trained and tested on the Kaggle dataset, the ultimate goal is to demonstrate how data science and machine learning can be applied to real-world problems.
 
@@ -30,40 +32,82 @@ Beyond the solutions already created on Kaggle, several other models can be trai
 
 The final output of this project would be a trained model that can predict a car's price given certain features. This model could be used in an application or a website to predict a car's price in real time.
 
+## Setup
 
-## How to create and activate a virtual environment in windows and linux
+We need to have Python 3.10.9 installed, you can download it from the official Python website: https://www.python.org/downloads/release/python-3109/
 
-* Windows:
+The packages needed to run this repository are enlisted in the requirements.txt file:
+- numpy
+- pandas
+- matplotlib
+- scipy
+- seaborn
+- scikit-learn
+- xgboost
+- catboost
+- lightgbm
+- pytest
+- pre-commit
+- autopep8
+- flake8
+- pylint
+- fastapi
+- uvicorn
 
-Open the command prompt (cmd) or PowerShell. Make sure you have Python and pip installed. You can check if they are installed by running the commands 
+## How to create and activate a virtual environment in Windows
+
+* Open the command prompt (cmd) or PowerShell. Make sure you have Python and pip installed. You can check if they are installed by running the commands 
 
 ```bash
  python --version and pip --version
 ```
 
-If they are not installed, you can download them from the official Python website. Install the virtualenv package using the command:
+* If they are not installed, you can download them from the official Python website. Install the virtualenv package using the command:
 
 ```bash
  pip install virtualenv
 ```
 
- Create a new virtual environment by running the command:
+ * Create a new virtual environment by running the command:
 
  ```bash
  py -3.10 -m venv [environment_name]
 ```
 
-Activate the virtual environment by running the command 
+* Activate the virtual environment by running the command 
 
  ```bash
  . .\[environment_name]\Scripts\activate
 ```
 
-Once the virtual environment is activated, you can install packages from a requirements.txt file using the command 
+* Once the virtual environment is activated, you can install packages from a requirements.txt file using the command 
 
  ```bash
  pip install -r requirements.txt
 ```
+
+# Model training instructions
+
+This repository contains a main.py file that can be used to train the model. Use the next command to star training the model
+
+```bash
+python main.py
+```
+# Unit test execution with Pytest
+
+The file for the unit test can be found in the path 'proyecto_integrador\tests'. There are four test files:
+- Test_Data_Existence.py
+- Test_Get_Dummies.py
+- Test_Scaler.py
+- Test_Models_Existence.py
+
+To run each one of them use the next command:
+
+```bash
+python [name of the test].py
+```
+
+# Usage
 
 # Docker Compose
 
