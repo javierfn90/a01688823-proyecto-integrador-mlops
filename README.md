@@ -95,6 +95,13 @@ To run each one of them use the next command:
 python [name of the test].py
 ```
 
+# API
+To run the API use the next command:
+
+```bash
+uvicorn main:app --reload
+```
+
 # Usage
 
 # Docker Compose

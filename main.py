@@ -1,9 +1,15 @@
-# main.py
-import pandas as pd
-from fastapi import FastAPI
+import os
+import sys
 from pydantic import BaseModel
-import joblib
-import numpy as np
+from fastapi import FastAPI
+from proyecto_integrador.predictor.predictor import ModelPredictor
+from proyecto_integrador.load.load import DataLoader
+from starlette.responses import JSONResponse
+
+# Add the parent directory to sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(current_dir, ".."))
+sys.path.append(parent_dir)
 
 class InputData(BaseModel):
     feature1: float
@@ -13,10 +19,7 @@ class InputData(BaseModel):
 class OutputData(BaseModel):
     prediction: int
 
-model = joblib.load(r'proyecto_integrador\models\model_AdaBoostRegressor.pkl')
-
 #add FastAPI to the project
-
 app = FastAPI()
 
 @app.post("/train")

@@ -1,44 +1,39 @@
 import logging
-import requests
-import shutil
+import os
+import pandas as pd
 
-# Set up logging configuration
-logging.basicConfig(filename='proyecto_integrador/load/load.log',
-                    level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+log_file = os.path.join("proyecto_integrador", "load", "load.log")
 
-# Create logger
-logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.DEBUG,
+                    format="%(asctime)s %(levelname)s - %(message)s",
+                    handlers=[
+                        logging.FileHandler(log_file),
+                        logging.StreamHandler()
+                    ])
 
-# Add file handler to logger
-file_handler = logging.FileHandler('proyecto_integrador\load\load.log')
-file_handler.setLevel(logging.DEBUG)
+class DataLoader:
+    def __init__(self, file_path: str):
+        self.file_path = file_path
 
-# Create formatter and add it to the file handler
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(formatter)
+    def load_data(self) -> pd.DataFrame:
+        logging.debug("Start loading data from CSV...")
+        data = pd.read_csv(self.file_path)
+        logging.debug("Data has been loaded successfully.")
+        return data
 
-# Add the file handler to the logger
-logger.addHandler(file_handler)
+def main():
+    logging.info("Starting the program...")
 
-# URL of the file to download
-file_url = "https://www.kaggle.com/datasets/hellbuoy/car-price-prediction/download?datasetVersionNumber=1"
+    # Create an instance of the DataLoader class
+    loader = DataLoader(r"C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\data\CarPrice_Assignment.csv")
 
-# Destination path for the downloaded file
-file_destination = r"C:\Users\francisco.figueroa\a01688823-proyecto-integrador-mlops\proyecto_integrador\data\CarPrice_Assignment.csv"
+    logging.debug("Start loading data...")
+    data = loader.load_data()
+    logging.debug("Data has been loaded.")
 
-# Send a GET request to the file URL
-response = requests.get(file_url, stream=True)
+    logging.info("Data loaded successfully.")
 
-# Check if the request was successful
-if response.status_code == 200:
-    # Open the file destination in binary mode
-    with open(file_destination, "wb") as file:
-        # Iterate over the response content in chunks and write to the file
-        for chunk in response.iter_content(chunk_size=128):
-            file.write(chunk)
+    logging.info("Program execution completed.")
 
-    logger.info("File downloaded successfully.")
-else:
-    logger.error("Failed to download the file.")
-    logger.warning("Check the file URL or internet connection.")
+if __name__ == "__main__":
+    main()
